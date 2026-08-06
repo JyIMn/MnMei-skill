@@ -1,0 +1,7 @@
+interface:
+  display_name: "MM-enhance"
+  short_description: "Rewrite rough prompts into clear, standalone prompts"
+  default_prompt: "Use MM-enhance to rewrite my raw instruction into a clearer standalone prompt. When materially helpful, also infer the deeper goal, hidden decision, or real problem behind my request and fold that into the enhanced prompt, then ask whether to continue with it in the same conversation."
+
+policy:
+  allow_implicit_invocation: true
