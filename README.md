@@ -6,11 +6,23 @@
 
 说明：Agent Skills 的机器可读名称需要使用小写 kebab-case，所以实际安装和调用名是 `mm-enhance`；`MM-enhance` 是对外展示名。
 
+## 仓库结构
+
+这个仓库是一个多 skill 集合，不是单 skill 仓库。每个 skill 都放在 `skills/<skill-id>/` 下面，后续新增 skill 也按这个结构扩展。
+
+```text
+skills/
+  mm-enhance/
+    SKILL.md
+    references/
+    agents/
+```
+
 ## 当前 Skill
 
 | Skill | 用途 | 入口文件 |
 |---|---|---|
-| `MM-enhance` / `mm-enhance` | 优化 Prompt、补齐上下文、澄清目标、保留原意 | [`SKILL.md`](SKILL.md) |
+| `MM-enhance` / `mm-enhance` | 优化 Prompt、补齐上下文、澄清目标、保留原意 | [`skills/mm-enhance/SKILL.md`](skills/mm-enhance/SKILL.md) |
 
 ## 适合什么场景
 
@@ -32,15 +44,17 @@
 在支持 Agent Skills 的工具里，对你的 agent 说：
 
 ```text
-帮我安装这个 skill：https://github.com/JyIMn/MnMei-skill
+帮我安装这个 skill：https://github.com/JyIMn/MnMei-skill/tree/main/skills/mm-enhance
 安装后 skill 名称使用 mm-enhance，展示名是 MM-enhance。
 ```
 
 ### 方式二：手动安装到 Codex
 
 ```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/JyIMn/MnMei-skill.git ~/.codex/skills/mm-enhance
+tmpdir=$(mktemp -d)
+git clone --depth 1 https://github.com/JyIMn/MnMei-skill.git "$tmpdir/MnMei-skill"
+mkdir -p ~/.codex/skills/mm-enhance
+cp -R "$tmpdir/MnMei-skill/skills/mm-enhance/." ~/.codex/skills/mm-enhance/
 ```
 
 重启 Codex 或开启新任务后，使用：
@@ -52,8 +66,10 @@ $mm-enhance <你的原始提示词>
 ### 方式三：手动安装到 Claude Code
 
 ```bash
-mkdir -p ~/.claude/skills
-git clone https://github.com/JyIMn/MnMei-skill.git ~/.claude/skills/mm-enhance
+tmpdir=$(mktemp -d)
+git clone --depth 1 https://github.com/JyIMn/MnMei-skill.git "$tmpdir/MnMei-skill"
+mkdir -p ~/.claude/skills/mm-enhance
+cp -R "$tmpdir/MnMei-skill/skills/mm-enhance/." ~/.claude/skills/mm-enhance/
 ```
 
 然后在 Claude Code 中使用：
@@ -80,18 +96,22 @@ $mm-enhance 我想让 AI 帮我研究一个同行账号为什么火，然后给�
 
 ## 更新
 
-如果已经安装过：
+如果已经安装过，可以重新覆盖安装当前子目录内容。
 
 ```bash
-cd ~/.codex/skills/mm-enhance
-git pull
+tmpdir=$(mktemp -d)
+git clone --depth 1 https://github.com/JyIMn/MnMei-skill.git "$tmpdir/MnMei-skill"
+mkdir -p ~/.codex/skills/mm-enhance
+cp -R "$tmpdir/MnMei-skill/skills/mm-enhance/." ~/.codex/skills/mm-enhance/
 ```
 
 Claude Code 用户把路径换成：
 
 ```bash
-cd ~/.claude/skills/mm-enhance
-git pull
+tmpdir=$(mktemp -d)
+git clone --depth 1 https://github.com/JyIMn/MnMei-skill.git "$tmpdir/MnMei-skill"
+mkdir -p ~/.claude/skills/mm-enhance
+cp -R "$tmpdir/MnMei-skill/skills/mm-enhance/." ~/.claude/skills/mm-enhance/
 ```
 
 ## 许可

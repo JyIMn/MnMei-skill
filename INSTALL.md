@@ -1,14 +1,22 @@
 # 安装说明
 
-`MM-enhance` 是一个轻量 Agent Skill。它不需要 Python、Node.js 或额外 API key；安装本质上就是把这个仓库放到你的 agent 的 skills 目录里。
+`MM-enhance` 是一个轻量 Agent Skill。它不需要 Python、Node.js 或额外 API key。
 
 Agent Skills 的机器可读名称需要使用小写 kebab-case，所以实际安装和调用名是 `mm-enhance`；`MM-enhance` 是对外展示名。
+
+这个仓库是多 skill 集合。不要把整个仓库直接 clone 成一个 skill；要安装的是子目录：
+
+```text
+skills/mm-enhance/
+```
 
 ## Codex
 
 ```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/JyIMn/MnMei-skill.git ~/.codex/skills/mm-enhance
+tmpdir=$(mktemp -d)
+git clone --depth 1 https://github.com/JyIMn/MnMei-skill.git "$tmpdir/MnMei-skill"
+mkdir -p ~/.codex/skills/mm-enhance
+cp -R "$tmpdir/MnMei-skill/skills/mm-enhance/." ~/.codex/skills/mm-enhance/
 ```
 
 然后重启 Codex，或开启一个新任务。调用方式：
@@ -20,8 +28,10 @@ $mm-enhance <你的原始提示词>
 ## Claude Code
 
 ```bash
-mkdir -p ~/.claude/skills
-git clone https://github.com/JyIMn/MnMei-skill.git ~/.claude/skills/mm-enhance
+tmpdir=$(mktemp -d)
+git clone --depth 1 https://github.com/JyIMn/MnMei-skill.git "$tmpdir/MnMei-skill"
+mkdir -p ~/.claude/skills/mm-enhance
+cp -R "$tmpdir/MnMei-skill/skills/mm-enhance/." ~/.claude/skills/mm-enhance/
 ```
 
 然后重启 Claude Code，或开启一个新会话。调用方式：
@@ -32,7 +42,7 @@ git clone https://github.com/JyIMn/MnMei-skill.git ~/.claude/skills/mm-enhance
 
 ## 其他支持 Agent Skills 的工具
 
-把本仓库 clone 到该工具的 skills 目录，并确保目录名是：
+把 `skills/mm-enhance/` 这个子目录复制到该工具的 skills 目录，并确保目录名是：
 
 ```text
 mm-enhance
@@ -47,18 +57,22 @@ references/workflow.md
 
 ## 更新
 
-Codex：
+重新覆盖安装当前子目录内容：
 
 ```bash
-cd ~/.codex/skills/mm-enhance
-git pull
+tmpdir=$(mktemp -d)
+git clone --depth 1 https://github.com/JyIMn/MnMei-skill.git "$tmpdir/MnMei-skill"
+mkdir -p ~/.codex/skills/mm-enhance
+cp -R "$tmpdir/MnMei-skill/skills/mm-enhance/." ~/.codex/skills/mm-enhance/
 ```
 
-Claude Code：
+Claude Code 用户把目标路径换成：
 
 ```bash
-cd ~/.claude/skills/mm-enhance
-git pull
+tmpdir=$(mktemp -d)
+git clone --depth 1 https://github.com/JyIMn/MnMei-skill.git "$tmpdir/MnMei-skill"
+mkdir -p ~/.claude/skills/mm-enhance
+cp -R "$tmpdir/MnMei-skill/skills/mm-enhance/." ~/.claude/skills/mm-enhance/
 ```
 
 ## 卸载
