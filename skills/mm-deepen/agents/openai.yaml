@@ -1,0 +1,7 @@
+interface:
+  display_name: "MM-deepen"
+  short_description: "做深不做大：先答专家四问，再把任务重写成专家级版本"
+  default_prompt: "Use $mm-deepen and follow its SKILL.md instructions."
+
+policy:
+  allow_implicit_invocation: true

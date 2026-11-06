@@ -1,0 +1,7 @@
+interface:
+  display_name: "MM-range"
+  short_description: "跨领域组队：名词换动词，按动作组队（含红队）做出成品并外部验收"
+  default_prompt: "Use $mm-range and follow its SKILL.md instructions."
+
+policy:
+  allow_implicit_invocation: true

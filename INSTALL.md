@@ -1,6 +1,8 @@
 # 安装说明
 
-`MM-enhance` 是一个轻量 Agent Skill。它不需要 Python、Node.js 或额外 API key。
+本仓库的 skill（`mm-enhance`、`mm-deepen`、`mm-range`）都是轻量 Agent Skill，不需要 Python、Node.js 或额外 API key。
+
+下面以 `mm-enhance` 为例；安装 `mm-deepen` 或 `mm-range` 时把命令里的 `mm-enhance` 换成对应 id。
 
 Agent Skills 的机器可读名称需要使用小写 kebab-case，所以实际安装和调用名是 `mm-enhance`；`MM-enhance` 是对外展示名。
 

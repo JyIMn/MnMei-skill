@@ -2,9 +2,9 @@
 
 面向 MnMei AI 社群公开分享的 Agent Skills 仓库。
 
-当前公开的第一个 skill 是 `MM-enhance`：把一段粗糙指令改写成更清晰、可独立执行的 Prompt，并在必要时帮你看见指令背后的真实问题或决策点。
+当前公开 3 个 skill：`MM-enhance`（把粗糙指令改写成清晰 Prompt）、`MM-deepen`（把任务做深到专家级）、`MM-range`（为重要交付物跨领域组队）。
 
-说明：Agent Skills 的机器可读名称需要使用小写 kebab-case，所以实际安装和调用名是 `mm-enhance`；`MM-enhance` 是对外展示名。
+说明：Agent Skills 的机器可读名称需要使用小写 kebab-case，所以实际安装和调用名是 `mm-enhance` / `mm-deepen` / `mm-range`；`MM-xxx` 是对外展示名。
 
 ## 仓库结构
 
@@ -16,6 +16,12 @@ skills/
     SKILL.md
     references/
     agents/
+  mm-deepen/
+    SKILL.md
+    agents/
+  mm-range/
+    SKILL.md
+    agents/
 ```
 
 ## 当前 Skill
@@ -23,15 +29,19 @@ skills/
 | Skill | 用途 | 入口文件 |
 |---|---|---|
 | `MM-enhance` / `mm-enhance` | 优化 Prompt、补齐上下文、澄清目标、保留原意 | [`skills/mm-enhance/SKILL.md`](skills/mm-enhance/SKILL.md) |
+| `MM-deepen` / `mm-deepen` | 做深不做大：先答专家四问（多做什么、原始素材、方法工具、外部裁判），再把任务重写成专家级版本 | [`skills/mm-deepen/SKILL.md`](skills/mm-deepen/SKILL.md) |
+| `MM-range` / `mm-range` | 跨领域组队：交付物名词换动词，按动作组队（含红队），让角色做事而不是演戏，最后外部验收 | [`skills/mm-range/SKILL.md`](skills/mm-range/SKILL.md) |
 
-## 适合什么场景
+三者分工：`mm-enhance` 让指令说清楚；`mm-deepen` 让一个任务在单一领域做到专家级；`mm-range` 把多个领域拉进来做一份高风险交付物。
+
+## MM-enhance 适合什么场景
 
 - 你要把一句模糊想法交给 AI 执行，但担心它理解偏。
 - 你想把口语化需求改成可以复制到另一个 AI 对话里的 Prompt。
 - 你知道自己想要一个结果，但还没说清楚输出格式、约束、判断标准。
 - 你怀疑表层问题背后还有一个更重要的决策，需要 AI 顺手帮你点出来。
 
-## 不适合什么场景
+## MM-enhance 不适合什么场景
 
 - 不适合替代事实核查、网页搜索或代码执行。
 - 不适合在你只想要直接答案时强行扩写。
@@ -78,7 +88,7 @@ cp -R "$tmpdir/MnMei-skill/skills/mm-enhance/." ~/.claude/skills/mm-enhance/
 /mm-enhance <你的原始提示词>
 ```
 
-更多细节见 [`INSTALL.md`](INSTALL.md)。
+安装 `mm-deepen` 或 `mm-range` 时，把上面命令里的 `mm-enhance` 换成对应 id 即可。更多细节见 [`INSTALL.md`](INSTALL.md)。
 
 ## 使用示例
 
@@ -93,6 +103,13 @@ $mm-enhance 我想让 AI 帮我研究一个同行账号为什么火，然后给�
 - 做了哪些改写
 - 可复制的增强版 Prompt
 - 是否继续执行的确认问题
+
+另外两个的用法：
+
+```text
+/mm-deepen 帮我分析一下为什么这个月社群续费率掉了
+/mm-range 我要给一家企业客户做一份 AI 培训报价方案
+```
 
 ## 更新
 
